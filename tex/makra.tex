@@ -1,0 +1,52 @@
+% ----------------------------------------------------------------------
+%  Identifikace protokolu (příkazy lze použít v celém dokumentu)
+% ----------------------------------------------------------------------
+
+%  Nastaví autora, název, datum, skupinu měření apod. 
+\newcommand{\Institute}{FJFI~ČVUT~v~Praze}
+
+% Examples -- subject
+%\newcommand{\Subject}{Základy fyzikálních měření}
+%\newcommand{\Subject}{Experimentální reaktorová fyzika}  %odkomentujte dle potřeby
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%  Máte-li více spoluměřících než jednoho, vložte jen jejich příjmení
+\newcommand{\Author}{}
+\newcommand{\Coauthor}{} 
+\newcommand{\Group}{} %číslo skupiny v rámci praktika, nikoli kruh
+\newcommand{\Labdate}{} %den, kdy chodíte na praktika, nikoli obor
+
+%  Tato část bude v každém protokolu jiná, nezapomeňte upravit!
+\newcommand{\Title}{}
+% \newcommand{\Labdate}{ -- } %datum měření, nikoli datum odevzdání
+
+% I guess that is not the value one would like to share
+% \newcommand{\Worktime}{5 h} %jak dlouho vám trvalo vypracování protokolu
+
+
+
+
+% ----------------------------------------------------------------------
+%  Vlastní příkazy
+% ----------------------------------------------------------------------
+
+
+%  Matematika
+\newcommand{\ee}{\mathrm{e}} %eulerovo číslo
+\newcommand{\ii}{\mathrm{i}} %imaginární jednotka
+
+% Jednotky
+\newcommand{\unit}[1]{\,\mathrm{#1}} %jednotky zadávejte pomocí tohoto příkazu
+\renewcommand{\deg}{\ensuremath{\mathring{\;}}} %symbol stupně
+\newcommand{\celsius}{\ensuremath{\deg\mathrm{C}}} %stupně celsia
+
+%(hodnota plus mínus chyba) jednotka
+\newcommand{\hodn}[3]{(#1 \pm #2)\unit{#3}} 
+
+%veličina [jednotka] do hlavičky tabulky
+\newcommand{\tabh}[2]{\ensuremath{#1\,[\mathrm{#2}]}} 
+
+
+

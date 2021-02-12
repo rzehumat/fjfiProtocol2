@@ -1,0 +1,321 @@
+% ----------------------------------------------------------------------
+%  Základní nastavení dokumentu - musí být na začátku každého tex
+%  (pořadí příkazů v této části je důležité!)
+% ----------------------------------------------------------------------
+
+%  Typ dokumentu - článek, prezentace aj.
+% Standardní základ
+%\documentclass[a4paper,10pt]{article} 
+%\usepackage[letterpaper]{geometry}
+%\geometry{verbose,tmargin=1.5cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+
+% Alternativní verze - vhodnější formát papíru (větší hustota textu)
+\documentclass[10pt]{scrartcl}
+\KOMAoptions{DIV=20} % formát papíru a odsazení od jeho okrajů
+
+%  Kódování výstupu - aby šlo z pdf kopírovat včetně háčků a čárek
+\usepackage[T1]{fontenc} 
+
+%  Kódování vstupu - v kódu lze použít háčky a čárky
+\usepackage[utf8]{inputenc} 
+\usepackage[version=3]{mhchem}
+%  Základní typografická pravidla češtiny/slovenštiny
+\usepackage[czech]{babel} 
+%\usepackage[slovak]{babel}
+% použijte jen jeden z příkazů
+% \usepackage{mathrsfs}
+
+%  Lépe vypadající písmo pro T1 kódování
+\usepackage{lmodern} 
+% je možno zakomentovat, nepoužívá-li se T1 kódování
+
+\usepackage{adjustbox}
+\usepackage{float} % rozšířené možnosti umístění obrázků
+\usepackage{soul}
+\usepackage{xargs}
+\usepackage{makecell}
+% \usepackage{fkssugar}
+%  Formátování stránek, empty = odstraní číslování
+% \pagestyle{empty}
+
+%  Řádkování
+\linespread{1.1}
+
+
+% ----------------------------------------------------------------------
+%  Doplňující balíčky
+% ----------------------------------------------------------------------
+
+%  Po desetinné čárce v matematickém módu se nevytvoří mezera
+\usepackage{icomma} 
+
+%  Umožňuje pracovat s grafikou
+\usepackage{graphicx}
+
+%  Umožňuje použít dva obrázky vedle sebe
+\usepackage{subcaption}
+
+%  Pro vkládání obrázků ve formátu eps (např. z gnuplot)
+\usepackage{epstopdf} 
+
+%  Automaticky odsadí i první paragraf v každé sekci
+\usepackage{indentfirst}
+
+%  Umožňuje rozdělovat obsah na více sloupců
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{pgffor}
+
+%  Umožňuje používat hypertextové odkazy, nastavuje jejich vlastnosti
+\usepackage[unicode]{hyperref}
+\usepackage{paralist}
+\usepackage{wasysym}
+% ----------------------------------------------------------------------
+%  Matematika
+% ----------------------------------------------------------------------
+
+%  Lepší zobrazování matematiky (rozšíření sum o \limits atd.)
+\everymath{\displaystyle}
+
+%  Široké spektrum příkazů pro matematiku
+% (Umožní např. psát přes \mathbb{N/R/Q/..} množiny čísel)
+\usepackage{amsmath,amssymb}
+
+%  Velikost fontu matematických výrazů v dokumentu lze pro danou
+% základního fontu dokumentu upravit pomocí:
+% \DeclareMathSizes{X}{Y}{Z}{U} kde:
+% X je velikost fontu v dokumentu, pro kterou se matematika upraví
+% Y je standartní velikost fontu matematiky
+% Z je velikost fontu zmenšených (vnořených výrazů)
+% U je velikost fontu ještě více zmenšených (vnořených výrazů).
+\DeclareMathSizes{10}{10}{8}{7}
+
+%  Široké spektrum příkazů pro fyziku
+\usepackage{physics}
+
+%  Psaní SI jednotek
+\usepackage[separate-uncertainty=true]{siunitx}
+\sisetup{output-decimal-marker = {,}}
+
+
+\usepackage{comment}
+
+
+%  Nám bližší zápis písmene epsilon
+\AtBeginDocument{%
+%\let\phi\varphi
+\let\epsilon\varepsilon
+}
+
+
+% ----------------------------------------------------------------------
+%  Pro češtinu/slovenštinu
+% ----------------------------------------------------------------------
+
+%  Lokalizace některých názvů do češtiny/slovenštiny
+\addto\captionsczech{\renewcommand{\figurename}{Obr.}}
+\addto\captionsczech{\renewcommand{\tablename}{Tab.}}
+%\addto\captionsczech{\renewcommand{\refname}{Reference}}
+
+\addto\captionsslovak{\renewcommand{\figurename}{Obr.}}
+\addto\captionsslovak{\renewcommand{\tablename}{Tab.}}
+%\addto\captionsslovak{\renewcommand{\refname}{Reference}
+
+%===========================Fykosi===========
+
+% \newcommand\tg{\mathop\mathrm{tg}\nolimits}	% cesky tangens
+%   \renewcommand\tan{\mathop\mathrm{tg}\nolimits}
+%   
+ \renewcommand\d{\mathrm{d}}			% differential sign 
+  
+%%%%%%%%
+%%%%%%%%%%%FYKOSi %%%%%%%%%%%%%
+% \newcommand\my@jd[1]{\begingroup\begingroup\!\jed@B#1@@}
+% \newcommand\jd[1]{\ensuremath{\my@jd{#1}}} % pro psani samostatnych jednotek (napr. $\jd{m.s^{-1}}$)
+% \newcommand\popi[2]{{$\dfrac{#1}{\jd{#2}}$}} % labels for graphs/tables
+\newcommand{\ti}{\textit} % zkrácený příkaz pro kurzívu
+\newcommand{\tb}{\textbf} % zkrácený příkaz pro tučné písmo
+\newcommand{\bv}{\mathbf} % zkrácený příkaz pro tučné písmo
+
+\let\underscore\_                                           % underscore sign
+\let\xor\^                                                  % xor sign
+\renewcommand\_[2][1]{\ifmmode _{\textnormal{\scalebox{#1}{#2}}}\else\underscore#2\fi} %roman subscript
+\renewcommand\^[2][1]{\ifmmode ^{\textnormal{\scalebox{#1}{#2}}}\else\xor#2\fi} %roman superscript
+\def\smallind{0.8}
+
+\def\({\left(} \def\){\right)}                              % parentheses
+
+  %================================
+\newcommand{\pic}[3]{%
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{./img/#1}
+\caption{#3}
+\label{#2}
+\end{figure}
+}
+  
+\newcommand{\footnotei}[2]{%
+\mbox{%
+\setbox0\hbox{#1}%
+\copy0%
+\hspace{-\wd0}}%
+\footnote{#2}%
+}
+% Odkomentujte následující příkaz, máte-li stažený balíček encxvlna 
+% (nutno stáhnout manuálně)
+%\usepackage{encxvlna} %vloží nezlomitelné mezery k jednopísmenným
+
+% \begingroup\uccode`~=`e\uppercase{\endgroup\let~}\E   % aktivni e se chova jako \E
+% \mathchardef\mathquote=\mathcode`\"
+% \def\jed@A #1 {\begingroup\def~{\,}\mathcode`\.="013B\mathcode`\,="013B \begingroup \mathcode`\e="8000 #1 \jed@B} % numbers written with dot or comma
+% \def\jed@B #1@@{\endgroup\if @#1@\else\,\mathcode`\.="0201 \mathup{#1}\fi\endgroup}
+% \begingroup\uccode`~=`"\uppercase{\endgroup\def~}#1"{\jed@A #1 @@}
+% \mathcode`\"="8000
+% 
+% \@ifpackageloaded{babel}{%
+%   \PackageWarning{fkssugar}{Package babel detected, macros with active double quote ", will be disabled.}
+% % -- Uncomment if you need use standard babel double quote macros --
+% %  \begingroup\uccode`~=`*\uppercase{\endgroup\def~}#1*{\jed@A #1 @@}
+% %  \mathcode`\*="8000
+%   \catcode`\"=12
+% }{%
+% }}
+
+
+
+\newcommandx{\eq}[1]{
+        \begin{equation}
+                #1
+        \end{equation}
+}
+
+\newcommandx{\cit}[1]{
+        \begin{compactitem}
+                #1
+        \end{compactitem}
+}
+
+\newcommandx{\cen}[1]{
+        \begin{compactenum}
+                #1
+        \end{compactenum}
+}
+
+\renewcommand\C{^\circ\mskip-2mu\mathrm{C}}                  % Celsiuv stupen
+% ----------------------------------------------------------------------
+%  Soubor s makry
+% ----------------------------------------------------------------------
+\input{tex/makra}
+%  nachází se ve složce /tex/
+
+
+
+% ----------------------------------------------------------------------
+%  Nastavení odkazů a výsledného pdf
+% ----------------------------------------------------------------------
+\hypersetup{
+colorlinks=true, 
+citecolor=blue, 
+filecolor=blue, 
+linkcolor=blue,
+urlcolor=blue, 
+pdftitle={\Title},    % title
+pdfauthor={\Author},     % author
+pdfsubject={Protokol},   % subject of the document
+pdfcreator={\Author},   % creator of the document
+%     pdfproducer={Producer}, % producer of the document
+%     pdfkeywords={keywords}, % list of keywords
+pdfnewwindow=true,      % links in new window
+}
+
+% ----------------------------------------------------------------------
+%  Začátek dokumentu - formátování na výstup
+% ----------------------------------------------------------------------
+\begin{document}
+
+% Interní proměnné, možno zobrazovat u prezentací, používají se při
+% generování pomocí \titlepage apod.
+\author{\Author}
+\title{\Title}
+\date{\Labdate}
+
+
+% ----------------------------------------------------------------------
+%  Hlavička dokumentu
+% ----------------------------------------------------------------------
+
+\setlength{\parindent}{0cm}
+\begin{multicols}{2}
+\textsf{\textbf{\Subject \hspace{9.5cm} \Institute}\\
+% \textsf{\textbf{\Subject \hfill \Institute}\\
+%\large  \Title \\[0.5cm]
+\textbf{\large{\Title}}}
+
+\begin{tabular}{rlrl}
+	 \textsf{Jméno:} & \textbf{\textsf\Author}    &      \textsf{Zpracováno:} &
+   \textsf{\Labdate} \\[1.5pt]
+	  \textsf{Měřeno:} & \textbf{\textsf{-}}     & \textsf{Klasifikace.:} &    \\[1.5pt]
+	%\textsf{Měřeno:} & \textbf{\textsf{\Labdate}} 
+\end{tabular}
+
+\begin{flushright}
+
+\includegraphics[scale=0.15]{img/fjfi.pdf}
+\hspace{0.4cm}
+\includegraphics[scale=0.15]{img/cvut.pdf}
+
+
+ 
+
+\end{flushright}
+\end{multicols}
+
+\hrule
+
+% ----------------------------------------------------------------------
+%  Tělo dokumentu
+% ----------------------------------------------------------------------
+
+\setlength{\parindent}{0.5cm}
+
+% ----------------------------------------------------------------------
+%  Protokol
+
+\pagenumbering{arabic}  % číslování stránek čísly
+\input{tex/protokol}
+% ----------------------------------------------------------------------
+
+% ----------------------------------------------------------------------
+%  Literatura
+
+\section{Použitá literatura}		
+\begingroup
+\renewcommand{\section}[2]{}
+\input{tex/reference}
+\endgroup
+% ----------------------------------------------------------------------
+
+
+% ----------------------------------------------------------------------
+%  Příloha
+
+% \clearpage 
+%%  \pagenumbering{roman}  % číslování stránek písmeny
+% 
+% \setcounter{equation}{0}
+% \setcounter{section}{0}
+% \numberwithin{equation}{section} % případné rovnice budou číslované pod číslem kapitoly
+% 
+% \part*{\LARGE{Příloha}}
+% 
+\input{tex/apendix}
+% ----------------------------------------------------------------------
+
+
+
+\end{document}
+
+% ----------------------------------------------------------------------
+%  Konec dokumentu
+% ----------------------------------------------------------------------
